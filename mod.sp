@@ -1,4 +1,4 @@
-mod "rss" {
+mod "dashboard" {
   title = "steampipe-mod-rss-insights1"
 }
 
