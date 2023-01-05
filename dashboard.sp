@@ -3,6 +3,12 @@ dashboard "many_withs_base" {
   with "n1" {
     query = query.q2
   }
+
+  chart {
+    title = "test"
+    sql = query.q1.sql
+  }
+
   graph {
     base = graph.g1
   }
