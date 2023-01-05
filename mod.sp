@@ -1,5 +1,5 @@
 mod "dashboard" {
-  title = "steampipe-mod-rss-insights1"
+  title = "Steampipe RSS Insights"
 }
 
 query "rss_steampipe_io_blog_post_totals" {
