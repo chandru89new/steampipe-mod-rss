@@ -1,41 +1,49 @@
-chart "chart_by_month" {
-  title = "Blog posts by month"
-  sql = query.rss_steampipe_io_blog_posts_by_month.sql
-}
-dashboard "dashboard_1" {
-  title = "Dashboard RSS"
-
-  text {
-    value = "Test description."
+dashboard "many_withs_base" {
+  title = "Many Withs Base"
+  with "n1" {
+    query = query.q2
+  }
+  graph {
+    base = graph.g1
   }
 
-  card {
-    sql = query.rss_steampipe_io_blog_post_totals.sql
-  }
-
-  container {
-    width = 6
-
-    text {
-      value = "### Steampipe.io Blog Posts by Month"
-    }
-
-    chart {
-        sql   = query.rss_steampipe_io_blog_posts_by_month.sql
-    }
-  }
-
-  container {
-    width = 6
-
-    text {
-      value = "### Steampipe.io Blog Posts by Month"
-    }
-
-    chart {
-      sql   = query.rss_steampipe_io_blog_posts_by_month.sql
-      type  = "bar"
+  graph {
+    node "n1" {
+      sql = <<-EOQ
+    select
+      $1 as id,
+      $1 as title
+EOQ
+      args = [ with.n1.rows[0]]
     }
   }
 }
 
+
+graph "g1"{
+  with "n1" {
+    query = query.q1
+  }
+  node "n1" {
+    sql = <<-EOQ
+    select
+      $1 as id,
+      $1 as title
+EOQ
+    args = [ with.n1.rows[0]]
+  }
+}
+
+
+
+query "q1"{
+  sql = <<-EOQ
+          select 'n1'
+        EOQ
+}
+
+query "q2"{
+  sql = <<-EOQ
+          select 'n1_dashboard'
+        EOQ
+}
