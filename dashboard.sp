@@ -12,9 +12,9 @@ dashboard "many_withs_base" {
     base = chart.c1
   }
 
-  // graph {
-  //   base = graph.g1
-  // }
+  graph {
+    base = graph.g1
+  }
 
   graph {
     node "n1" {
@@ -39,7 +39,7 @@ EOQ
 
 graph "g1"{
   with "n1" {
-    query = query.q2
+    query = query.q3
   }
   node "n1" {
     sql = <<-EOQ
