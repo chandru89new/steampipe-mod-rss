@@ -12,9 +12,9 @@ dashboard "many_withs_base" {
     base = chart.c1
   }
 
-  graph {
-    base = graph.g1
-  }
+  // graph {
+  //   base = graph.g1
+  // }
 
   graph {
     node "n1" {
