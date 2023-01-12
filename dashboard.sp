@@ -1,8 +1,8 @@
 dashboard "many_withs_base" {
   title = "Many Withs Base"
-  // with "n1" {
-  //   query = query.q1
-  // }
+  with "n1" {
+    query = query.q1
+  }
 
   card {
     query = query.q1
@@ -12,20 +12,20 @@ dashboard "many_withs_base" {
     base = chart.c1
   }
 
-  // graph {
-  //   base = graph.g1
-  // }
+  graph {
+    base = graph.g1
+  }
 
-//   graph {
-//     node "n1" {
-//       sql = <<-EOQ
-//       select
-//         $1 as id,
-//         $1 as title
-// EOQ
-//       args = [ with.n1.rows[0] ]
-//     }
-//   }
+  graph {
+    node "n1" {
+      sql = <<-EOQ
+      select
+        $1 as id,
+        $1 as title
+EOQ
+      args = [ with.n1.rows[0] ]
+    }
+  }
 }
 
 chart "c1" {
@@ -37,21 +37,19 @@ EOQ
 }
 
 
-// graph "g1"{
-//   with "n1" {
-//     query = query.q3
-//   }
-//   node "n1" {
-//     sql = <<-EOQ
-//     select
-//       $1 as id,
-//       $1 as title
-// EOQ
-//     args = [ with.n1.rows[0]]
-//   }
-// }
-
-
+graph "g1"{
+  with "n1" {
+    query = query.q3
+  }
+  node "n1" {
+    sql = <<-EOQ
+    select
+      $1 as id,
+      $1 as title
+EOQ
+    args = [ with.n1.rows[0]]
+  }
+}
 
 query "q1"{
   sql = <<-EOQ
